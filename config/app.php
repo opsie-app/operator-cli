@@ -54,7 +54,9 @@ return [
     */
 
     'providers' => [
+        Illuminate\Notifications\NotificationServiceProvider::class,
         App\Providers\AppServiceProvider::class,
+        Spatie\WebhookServer\WebhookServerServiceProvider::class,
     ],
 
 ];
