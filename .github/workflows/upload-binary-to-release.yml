@@ -1,0 +1,47 @@
+name: Artifacts
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  push:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+
+    runs-on: ubuntu-latest
+
+    name: Upload Binary to Release
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          extensions: dom, curl, intl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
+          coverage: pcov
+
+      - uses: actions/cache@v2.1.6
+        name: Cache Composer dependencies
+        with:
+          path: ~/.composer/cache/files
+          key: composer-${{ hashFiles('composer.json') }}
+
+      - name: Install dependencies
+        run: |
+          composer install --no-interaction --no-progress --prefer-dist --optimize-autoloader --no-dev
+
+      - name: Compile binary
+        run: |
+          php artisan app:build operator --build-version=stable
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: builds/operator
+          asset_name: operator
+          tag: ${{ github.ref }}
+          overwrite: true
