@@ -29,6 +29,8 @@ class Monitor extends Command
         {--metadata=* : Array list of key=value strings to set as metadata to Prometheus and to send off to payloads.}
         {--webhook-url=* : Array list of webhook URLs.}
         {--webhook-secret=* : Array list of secrets to sign the webhook URLs with.}
+        {--dns-checking : Enable DNS resolving checks for the domain.}
+        {--dns-checking-server=* : Specify the DNS servers to resolve. Can be a mix of "google", "cloudflare", "local" or any IP/NS for other resolvers. The order of the options defines the chain order.}
         {--once : Perform only one check, without monitoring the resource.}
     ';
 
@@ -40,29 +42,69 @@ class Monitor extends Command
     protected $description = 'Monitor the given website URL.';
 
     /**
+     * The Monitor instance.
+     *
+     * @var \App\Monitor
+     */
+    protected $monitor;
+
+    /**
      * Execute the console command.
      *
      * @return mixed
      */
     public function handle()
     {
-        $monitor = AppMonitor::website($this->argument('url'))
-            ->method($this->option('method'))
+        $this->monitor = AppMonitor::website($this->argument('url'));
+
+        $this->configureHttp();
+        $this->configureWebhooks();
+        $this->configureDns();
+
+        $this->monitor->run();
+    }
+
+    /**
+     * Configure the Monitor for HTTP checks.
+     *
+     * @return void
+     */
+    protected function configureHttp(): void
+    {
+        $this->monitor->method($this->option('method'))
             ->body(@json_decode($this->option('body')))
             ->postAsForm($this->option('post-as-form'))
             ->headers($this->parseOptionAsKeyValue('header'))
             ->acceptHeader($this->option('accept-header'))
             ->timeout($this->option('timeout'))
             ->interval($this->option('interval'))
-            ->once($this->option('once'))
             ->username($this->option('username'))
             ->password($this->option('password'))
             ->useDigestAuth($this->option('digest-auth'))
             ->bearerToken($this->option('bearer-token'))
             ->metadata($this->parseOptionAsKeyValue('metadata'))
-            ->webhooks($this->getWebhooksWithSecrets());
+            ->once($this->option('once'));
+    }
 
-        $monitor->run();
+    /**
+     * Configure the webhooks.
+     *
+     * @return void
+     */
+    protected function configureWebhooks(): void
+    {
+        $this->monitor->webhooks($this->getWebhooksWithSecrets());
+    }
+
+    /**
+     * Configure the Monitor for DNS checks.
+     *
+     * @return void
+     */
+    protected function configureDns(): void
+    {
+        $this->monitor->withDnsChecking($this->option('dns-checking'))
+            ->dnsCheckingServers($this->option('dns-checking-server'));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Concerns\MonitorsDns;
 use App\Concerns\MonitorsHttp;
 use App\Concerns\MonitorsSsl;
 use App\Concerns\SendsWebhooks;
@@ -9,6 +10,7 @@ use Illuminate\Support\Str;
 
 class Monitor
 {
+    use MonitorsDns;
     use MonitorsHttp;
     use MonitorsSsl;
     use SendsWebhooks;
@@ -67,10 +69,12 @@ class Monitor
         while (true) {
             $httpPayload = $this->checkHttp($this->url);
             $sslPayload = $this->checkSsl($this->url);
+            $dnsPayload = $this->checkDns($this->url);
 
             $this->deliverPayload([
                 'http' => $httpPayload,
                 'ssl' => $sslPayload,
+                'dns' => $dnsPayload,
                 'metadata' => $this->metadata,
             ]);
 
