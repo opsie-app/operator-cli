@@ -7,6 +7,14 @@ Opsie Operator
 
 Monitor your website for HTTP status, performance and SSL certificate uptime.
 
+## 🤝 Supporting
+
+Development is done by investing time, so any help coming is appreciated. You can sponsor the development  via [Github Sponsors](https://github.com/sponsors/rennokki). 📦
+
+## 📃 Documentation
+
+[The entire documentation can be found on Gitbook](https://operator-cli-docs.opsie.app)
+
 ## 🐛 Testing
 
 ``` bash
