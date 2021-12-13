@@ -61,5 +61,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: quay.io/opsie/operator:latest
+          tags: quay.io/opsie/operator-cli:latest
           context: .
