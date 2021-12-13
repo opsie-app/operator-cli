@@ -17,15 +17,16 @@
     ],
     "require": {
         "php": "^8.0",
-        "laravel-zero/framework": "^8.8",
         "illuminate/bus": "^8.62",
         "illuminate/database": "^8.63",
         "illuminate/http": "^8.63",
         "illuminate/notifications": "^8.63",
         "illuminate/queue": "^8.63",
         "illuminate/support": "^8.55",
+        "laravel-zero/framework": "^8.8",
         "promphp/prometheus_client_php": "^2.3",
-        "spatie/laravel-webhook-server": "^3.0"
+        "spatie/laravel-webhook-server": "^3.0",
+        "spatie/ssl-certificate": "^2.1"
     },
     "require-dev": {
         "intonate/tinker-zero": "^1.2",
