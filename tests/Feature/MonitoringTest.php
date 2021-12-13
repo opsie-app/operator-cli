@@ -17,6 +17,7 @@ class HttpTest extends TestCase
             '--metadata' => ['region=us'],
             '--webhook-url' => ['https://app.test'],
             '--webhook-secret' => ['secret'],
+            '--dns-checking' => true,
             '--once' => true,
         ]);
 
@@ -40,6 +41,9 @@ class HttpTest extends TestCase
             $this->assertNotNull($job->payload['ssl']['fingerprint'] ?? null);
             $this->assertNotNull($job->payload['ssl']['additional_domains'] ?? null);
 
+            $this->assertNotNull($job->payload['dns']['time'] ?? null);
+            $this->assertNotNull($job->payload['dns']['records'] ?? null);
+
             $this->assertEquals('post', $job->httpVerb);
             $this->assertEquals(1, $job->tries);
             $this->assertEquals('Opsiebot/1.0', $job->headers['User-Agent']);
@@ -59,6 +63,7 @@ class HttpTest extends TestCase
             '--metadata' => ['region=us'],
             '--webhook-url' => ['https://app.test'],
             '--webhook-secret' => ['secret'],
+            '--dns-checking' => true,
             '--once' => true,
         ]);
 
@@ -83,6 +88,9 @@ class HttpTest extends TestCase
             $this->assertNull($job->payload['ssl']['additional_domains'] ?? null);
             $this->assertNotNull($job->payload['ssl']['message']);
 
+            $this->assertNotNull($job->payload['dns']['time'] ?? null);
+            $this->assertNotNull($job->payload['dns']['records'] ?? null);
+
             $this->assertEquals('post', $job->httpVerb);
             $this->assertEquals(1, $job->tries);
             $this->assertEquals('Opsiebot/1.0', $job->headers['User-Agent']);
@@ -103,6 +111,7 @@ class HttpTest extends TestCase
             '--metadata' => ['region=us'],
             '--webhook-url' => ['https://app.test'],
             '--webhook-secret' => ['secret'],
+            '--dns-checking' => true,
             '--once' => true,
         ]);
 
@@ -126,6 +135,9 @@ class HttpTest extends TestCase
             $this->assertNull($job->payload['ssl']['fingerprint'] ?? null);
             $this->assertNull($job->payload['ssl']['additional_domains'] ?? null);
             $this->assertNotNull($job->payload['ssl']['message']);
+
+            $this->assertNotNull($job->payload['dns']['time'] ?? null);
+            $this->assertNotNull($job->payload['dns']['records'] ?? null);
 
             $this->assertEquals('post', $job->httpVerb);
             $this->assertEquals(1, $job->tries);
