@@ -7,6 +7,7 @@ use App\Concerns\MonitorsHttp;
 use App\Concerns\MonitorsSsl;
 use App\Concerns\SendsWebhooks;
 use Illuminate\Support\Str;
+use LaravelZero\Framework\Commands\Command;
 
 class Monitor
 {
@@ -40,21 +41,24 @@ class Monitor
      * Create a new Monitor instance.
      *
      * @param  string  $url
+     * @param  Command  $cli
      * @return static
      */
-    public static function website(string $url)
+    public static function website(string $url, Command $cli)
     {
-        return new static($url);
+        return new static($url, $cli);
     }
 
     /**
      * Create a new Monitor instance.
      *
      * @param  string  $url
+     * @param  Command  $cli
      * @return void
      */
     public function __construct(
         protected string $url,
+        protected Command $cli,
     ) {
         $this->shouldCheckSsl = Str::startsWith($url, 'https://');
     }
@@ -66,7 +70,19 @@ class Monitor
      */
     public function run(): void
     {
+        if ($this->shouldCheckSsl) {
+            $this->cli->line('The SSL checks are enabled.');
+        }
+
+        if ($this->shouldCheckDns) {
+            $this->cli->line('The DNS checks and records retrievals are enabled.');
+        }
+
+        $this->cli->line("The checks will run at an interval of {$this->interval} seconds.");
+
         while (true) {
+            $this->cli->line('['.now()->toIso8601String().'] Performing a check...', verbosity: 'v');
+
             $httpPayload = $this->checkHttp($this->url);
             $sslPayload = $this->checkSsl($this->url);
             $dnsPayload = $this->checkDns($this->url);
@@ -77,6 +93,8 @@ class Monitor
                 'dns' => $dnsPayload,
                 'metadata' => $this->metadata,
             ]);
+
+            $this->cli->line('Check done.', verbosity: 'v');
 
             if ($this->once) {
                 break;

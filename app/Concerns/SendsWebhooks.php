@@ -37,6 +37,7 @@ trait SendsWebhooks
      */
     protected function deliverPayload(array $payload): void
     {
+        /** @var \App\Monitor $this */
         foreach ($this->webhooks as $webhook) {
             WebhookCall::create()
                 ->url($webhook['url'])
@@ -46,6 +47,8 @@ trait SendsWebhooks
                 ->timeoutInSeconds($this->timeout)
                 ->withHeaders(['User-Agent' => 'Opsiebot/1.0'])
                 ->dispatch();
+
+            $this->cli->line('['.now()->toIso8601String().'] Sent webhook to '.$webhook['url'], verbosity: 'v');
         }
     }
 }
