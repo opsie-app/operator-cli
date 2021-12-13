@@ -55,11 +55,13 @@ class Monitor extends Command
      */
     public function handle()
     {
-        $this->monitor = AppMonitor::website($this->argument('url'));
+        $this->monitor = AppMonitor::website($this->argument('url'), $this);
 
         $this->configureHttp();
         $this->configureWebhooks();
         $this->configureDns();
+
+        $this->line('Running the operator...', verbosity: 'v');
 
         $this->monitor->run();
     }

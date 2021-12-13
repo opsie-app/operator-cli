@@ -19,6 +19,7 @@ class HttpTest extends TestCase
             '--webhook-secret' => ['secret'],
             '--dns-checking' => true,
             '--once' => true,
+            '--verbose' => true,
         ]);
 
         Queue::assertPushed(CallWebhookJob::class, function ($job) {
@@ -65,6 +66,7 @@ class HttpTest extends TestCase
             '--webhook-secret' => ['secret'],
             '--dns-checking' => true,
             '--once' => true,
+            '--verbose' => true,
         ]);
 
         Queue::assertPushed(CallWebhookJob::class, function ($job) {
@@ -113,6 +115,7 @@ class HttpTest extends TestCase
             '--webhook-secret' => ['secret'],
             '--dns-checking' => true,
             '--once' => true,
+            '--verbose' => true,
         ]);
 
         Queue::assertPushed(CallWebhookJob::class, function ($job) {
