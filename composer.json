@@ -25,7 +25,7 @@
         "illuminate/support": "^8.55",
         "laravel-zero/framework": "^8.8",
         "promphp/prometheus_client_php": "^2.3",
-        "remotelyliving/php-dns": "^4.2",
+        "remotelyliving/php-dns": "^4.3",
         "spatie/laravel-webhook-server": "^3.0",
         "spatie/ssl-certificate": "^2.1"
     },
