@@ -151,4 +151,25 @@ class HttpTest extends TestCase
             return true;
         });
     }
+
+    public function test_app_timing()
+    {
+        Queue::fake();
+
+        $this->artisan('monitor', [
+            'url' => 'https://google.com',
+            '--metadata' => ['region=us'],
+            '--webhook-url' => ['https://app.test'],
+            '--webhook-secret' => ['secret'],
+            '--dns-checking' => true,
+            '--once' => true,
+            '--verbose' => true,
+        ]);
+
+        Queue::assertPushed(CallWebhookJob::class, function ($job) {
+            $this->assertTrue($job->payload['http']['timing']['app'] > 0);
+
+            return true;
+        });
+    }
 }

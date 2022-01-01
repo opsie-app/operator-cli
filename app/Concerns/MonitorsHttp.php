@@ -4,6 +4,7 @@ namespace App\Concerns;
 
 use Exception;
 use Illuminate\Http\Client\Response;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 
 trait MonitorsHttp
@@ -249,6 +250,10 @@ trait MonitorsHttp
                     'start_transfer' => $this->getResponseStat($response, 'starttransfer_time'),
                 ],
             ]);
+
+            $payload['timing']['app'] = value(function () use ($payload) {
+                return $payload['timing']['total'] - collect(Arr::except($payload['timing'], ['total', 'pre_transfer', 'start_transfer']))->sum();
+            });
         } catch (Exception $e) {
             $payload = array_merge($payload, [
                 'message' => $e->getMessage(),
