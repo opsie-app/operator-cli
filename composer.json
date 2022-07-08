@@ -20,7 +20,7 @@
         "illuminate/bus": "^8.62",
         "illuminate/database": "^8.63",
         "illuminate/http": "^8.63",
-        "illuminate/notifications": "^8.63",
+        "illuminate/notifications": "^8.83",
         "illuminate/queue": "^8.63",
         "illuminate/support": "^8.83",
         "laravel-zero/framework": "^8.10",
