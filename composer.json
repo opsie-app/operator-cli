@@ -23,7 +23,7 @@
         "illuminate/notifications": "^8.63",
         "illuminate/queue": "^8.63",
         "illuminate/support": "^8.83",
-        "laravel-zero/framework": "^8.8",
+        "laravel-zero/framework": "^8.10",
         "promphp/prometheus_client_php": "^2.3",
         "remotelyliving/php-dns": "^4.2",
         "spatie/laravel-webhook-server": "^3.0",
