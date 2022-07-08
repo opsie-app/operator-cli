@@ -30,20 +30,20 @@ jobs:
           extensions: dom, curl, intl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
           coverage: pcov
 
-      - uses: actions/cache@v2.1.6
+      - uses: actions/cache@v3.0.4
         name: Cache Composer dependencies
         with:
           path: ~/.composer/cache/files
           key: composer-${{ hashFiles('composer.json') }}
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v2
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
 
       - name: Login to Quay
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: quay.io
           username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
@@ -58,7 +58,7 @@ jobs:
           php artisan app:build operator --build-version=stable
 
       - name: Build and Push
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           push: true
           tags: quay.io/opsie/operator-cli:latest
