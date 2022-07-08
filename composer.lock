@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b4edad4ea8f6b589153d2efb7a3120fe",
+    "content-hash": "53c292329bf15e449f471096658cf0bb",
     "packages": [
         {
             "name": "brick/math",
@@ -4345,16 +4345,16 @@
         },
         {
             "name": "spatie/ssl-certificate",
-            "version": "2.1.2",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ssl-certificate.git",
-                "reference": "bb5b2f04b152c1672255c749bed23d74a7aab7a3"
+                "reference": "89596d295787b37139e606a061174f4dc8b2d96d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ssl-certificate/zipball/bb5b2f04b152c1672255c749bed23d74a7aab7a3",
-                "reference": "bb5b2f04b152c1672255c749bed23d74a7aab7a3",
+                "url": "https://api.github.com/repos/spatie/ssl-certificate/zipball/89596d295787b37139e606a061174f4dc8b2d96d",
+                "reference": "89596d295787b37139e606a061174f4dc8b2d96d",
                 "shasum": ""
             },
             "require": {
@@ -4371,12 +4371,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Spatie\\SslCertificate\\": "src"
-                },
                 "files": [
                     "src/helpers.php"
-                ]
+                ],
+                "psr-4": {
+                    "Spatie\\SslCertificate\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -4397,8 +4397,7 @@
                 "ssl-certificate"
             ],
             "support": {
-                "issues": "https://github.com/spatie/ssl-certificate/issues",
-                "source": "https://github.com/spatie/ssl-certificate/tree/2.1.2"
+                "source": "https://github.com/spatie/ssl-certificate/tree/2.2.0"
             },
             "funding": [
                 {
@@ -4410,7 +4409,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2021-11-17T15:04:18+00:00"
+            "time": "2022-06-16T19:12:19+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

@@ -27,7 +27,7 @@
         "promphp/prometheus_client_php": "^2.3",
         "remotelyliving/php-dns": "^5.0",
         "spatie/laravel-webhook-server": "^3.2",
-        "spatie/ssl-certificate": "^2.1"
+        "spatie/ssl-certificate": "^2.2"
     },
     "require-dev": {
         "intonate/tinker-zero": "^1.2",
