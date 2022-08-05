@@ -4,6 +4,7 @@ namespace App\Commands;
 
 use App\Monitor as AppMonitor;
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Support\Str;
 use LaravelZero\Framework\Commands\Command;
 
 class Monitor extends Command
@@ -57,8 +58,9 @@ class Monitor extends Command
     {
         $this->monitor = AppMonitor::website($this->argument('url'), $this);
 
-        $this->configureHttp();
         $this->configureWebhooks();
+        $this->configureHttp();
+        $this->configureSsl();
         $this->configureDns();
 
         $this->line('Running the operator...', verbosity: 'v');
@@ -107,6 +109,16 @@ class Monitor extends Command
     {
         $this->monitor->withDnsChecking($this->option('dns-checking'))
             ->dnsCheckingServers($this->option('dns-checking-server'));
+    }
+
+    /**
+     * Configure SSL checking.
+     *
+     * @return void
+     */
+    protected function configureSsl(): void
+    {
+        $this->monitor->withSslChecking(Str::startsWith($this->monitor->url, 'https://'));
     }
 
     /**

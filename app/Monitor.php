@@ -6,7 +6,6 @@ use App\Concerns\MonitorsDns;
 use App\Concerns\MonitorsHttp;
 use App\Concerns\MonitorsSsl;
 use App\Concerns\SendsWebhooks;
-use Illuminate\Support\Str;
 use LaravelZero\Framework\Commands\Command;
 
 class Monitor
@@ -57,10 +56,10 @@ class Monitor
      * @return void
      */
     public function __construct(
-        protected string $url,
+        public string $url,
         protected Command $cli,
     ) {
-        $this->shouldCheckSsl = Str::startsWith($url, 'https://');
+        //
     }
 
     /**

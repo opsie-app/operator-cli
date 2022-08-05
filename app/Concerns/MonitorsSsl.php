@@ -15,6 +15,19 @@ trait MonitorsSsl
     protected $shouldCheckSsl = false;
 
     /**
+     * Enable SSL checking.
+     *
+     * @param  bool  $shoudCheckSsl
+     * @return $this
+     */
+    public function withSslChecking(bool $shouldCheckSsl = true)
+    {
+        $this->shouldCheckSsl = $shouldCheckSsl;
+
+        return $this;
+    }
+
+    /**
      * Check the SSL certificate and return a payload.
      *
      * @param  string  $url
