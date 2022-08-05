@@ -61,6 +61,7 @@ trait MonitorsSsl
                 'algorithm' => $certificate->getSignatureAlgorithm(),
                 'fingerprint' => $certificate->getFingerprint(),
                 'additional_domains' => $certificate->getAdditionalDomains(),
+                'raw' => $certificate->getRawCertificateFields(),
             ]);
         } catch (Exception $e) {
             $payload = array_merge($payload, [
