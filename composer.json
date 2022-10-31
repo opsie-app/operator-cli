@@ -20,7 +20,7 @@
         "illuminate/bus": "^9.1",
         "illuminate/database": "^9.1",
         "illuminate/http": "^9.1",
-        "illuminate/notifications": "^9.1",
+        "illuminate/notifications": "^9.37",
         "illuminate/queue": "^9.1",
         "illuminate/support": "^9.1",
         "laravel-zero/framework": "^9.1",
