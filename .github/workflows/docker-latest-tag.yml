@@ -58,7 +58,7 @@ jobs:
           php artisan app:build operator --build-version=stable
 
       - name: Build and Push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           push: true
           tags: quay.io/opsie/operator-cli:latest
