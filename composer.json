@@ -19,7 +19,7 @@
         "php": "^8.1",
         "illuminate/bus": "^9.1",
         "illuminate/database": "^9.1",
-        "illuminate/http": "^9.1",
+        "illuminate/http": "^9.51",
         "illuminate/notifications": "^9.1",
         "illuminate/queue": "^9.1",
         "illuminate/support": "^9.1",
