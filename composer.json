@@ -32,7 +32,7 @@
     "require-dev": {
         "intonate/tinker-zero": "^1.2",
         "mockery/mockery": "^1.5.0",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^9.6",
         "vimeo/psalm": "^4.24"
     },
     "autoload": {
